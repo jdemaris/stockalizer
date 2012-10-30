@@ -11,22 +11,27 @@ public class Filing {
 	/**
 	 * Date the filing was made
 	 */
-	String date;
+	public String date;
 	
 	/**
-	 * Name of the filing
+	 * Description of the filing
 	 */
-	String name;
+	public String description;
 	
 	/**
 	 * Ticker symbol the filing is for
 	 */
-	String ticker;
+	public String ticker;
+	
+	/**
+	 * E.g. "10-K"
+	 */
+	public String type;
 	
 	/**
 	 * URL that the filing is stored at
 	 */
-	String url;
+	public String url;
 	
 	/**
 	 * Hits up the web server and pulls this filing

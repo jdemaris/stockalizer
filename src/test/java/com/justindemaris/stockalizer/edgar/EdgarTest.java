@@ -69,4 +69,18 @@ public class EdgarTest extends TestCase {
 		}
 		assertNull(result);
 	}
+	
+	public void testFindInvalidFilings() {
+		// set up an invalid URL
+		edgar.baseUrl = "http://localhost/fail.php?ticker=";
+		FilingList list = null;		
+		
+		try {
+			list = edgar.findFilings("GOOG", "10-K");
+		} catch ( IOException e ) {
+			// do nothing
+		}
+		
+		assertNull(list);
+	}
 }

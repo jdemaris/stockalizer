@@ -1,6 +1,9 @@
 package com.justindemaris.stockalizer;
 
 import com.justindemaris.stockalizer.edgar.Edgar;
+import com.justindemaris.stockalizer.edgar.Filing;
+import com.justindemaris.stockalizer.edgar.FilingList;
+import java.io.IOException;
 import java.util.Arrays;
 import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.service.ThriftKsDef;
@@ -45,11 +48,22 @@ public class App {
 		
 		// Connect to Edgar
 		edgar = new Edgar();
+		
+		// Get a list of all of the 10-K filings for Google
+		try {
+			FilingList list = edgar.findFilings("GOOG", "10-K");
+			System.out.println("Found a total of " + list.filings.size() + " filings");
+			
+			for ( int i = 0; i < list.filings.size(); i++ ) {
+				Filing filing = list.filings.get(i);
+				System.out.println(filing.date + " - " + filing.type + " - " + filing.description);
+			}
+		} catch ( IOException e ) {
+			System.out.println("Failed to read list of Google 10-K filings");
+		}
 	}
 	
 	public void doCassandraStuff() {
-		cluster = HFactory.getOrCreateCluster("test-cluster", "localhost:9160");
-
 		KeyspaceDefinition keyspaceDef = cluster.describeKeyspace("MyKeySpace");
 		
 		if ( keyspaceDef == null ) {

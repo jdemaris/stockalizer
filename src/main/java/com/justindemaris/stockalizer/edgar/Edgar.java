@@ -14,7 +14,7 @@ public class Edgar {
 	/**
 	 * Base URL for all Edgar search queries
 	 */
-	protected String baseUrl = "http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=";
+	public String baseUrl = "http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=";
 	
 	/**
 	 * Builds the URL to fetch a list of filings on a particular stock
@@ -34,10 +34,14 @@ public class Edgar {
 	 * 
 	 * @param ticker  E.g. "GOOG"
 	 * @param filing  E.g. "10-K"
+	 * @throws IOException
 	 * @return 
 	 */
-	FilingList findFilings(String ticker, String filing) {
-		return null;
+	public FilingList findFilings(String ticker, String filing) throws IOException {
+		String url = buildSearchUrl(ticker, filing);
+		Document searchResultPage = pullUrl(url);
+		FilingList list = new FilingList(ticker, searchResultPage);
+		return list;
 	}
 	
 	/**
