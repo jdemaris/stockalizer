@@ -51,7 +51,7 @@ public class App {
 		
 		// Get a list of all of the 10-K filings for Google
 		try {
-			FilingList list = edgar.findFilings("GOOG", "10-K");
+			FilingList list = edgar.findFilings("F", "10-Q");
 			System.out.println("Found a total of " + list.filings.size() + " filings");
 			
 			for ( int i = 0; i < list.filings.size(); i++ ) {

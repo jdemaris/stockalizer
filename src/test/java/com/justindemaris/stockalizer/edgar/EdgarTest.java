@@ -43,7 +43,7 @@ public class EdgarTest extends TestCase {
 		String url = edgar.buildSearchUrl(ticker, filing);
 		
 		assertEquals(
-			"http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=GOOG&type=10-K",
+			"http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=GOOG&type=10-K&count=100",
 			url
 		);
 	}

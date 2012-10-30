@@ -25,6 +25,7 @@ public class Edgar {
 	public String buildSearchUrl(String ticker, String filing) {
 		String url = "";
 		url = baseUrl + ticker + "&type=" + filing;
+		url = url + "&count=100";
 		return url;
 	}
 	
